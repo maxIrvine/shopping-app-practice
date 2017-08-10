@@ -15,3 +15,9 @@ create table items (
 );
 
 -- FOR LATER: add reviews, add ratings
+
+create table orders (
+    order_id serial primary key,
+    item_id integer references items,
+    customer_id integer references customers
+);
