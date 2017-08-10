@@ -34,8 +34,26 @@ describe("Customers", () => {
                           expect(c2.name).to.equal(data[0]);
                           expect(c2.email).to.equal(data[1]);
                           expect(c2.address).to.equal(data[2]);
-                          done();
+                          done();   
                       });
           });
     });
+    it('should have a customer_id when we retreive from db', (done) => {
+        let data = ['ronald mcdonald', 'r@suckAcock.com', '123 up yours', 'passme'];
+        let c1 = new Customer(...data);
+        c1.save()
+          .then((result) => {
+              let customer_id = result.customer_id;
+              Customer.get(customer_id)
+                      .then((c2) => {
+                          expect(c2.customer_id).to.equal(customer_id);
+                          done();   
+                      })
+                      .catch(console.log);
+          });
+    });
+    
+    // it('should update a user and retain the new values', (done) => {
+
+    // });
 });
