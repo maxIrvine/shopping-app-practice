@@ -6,14 +6,22 @@ const dbConfig = {
     database: process.env.DB_NAME
 
 }
-const db = pg(dbConfig);
 
 class Customer {
-    constructor() {
-
+    constructor(name, email, address, password) {
+        this.db = pg(dbConfig);
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.password = password;
     }
     save() {
-        
+        return this.db.query(`
+            insert into customers
+            (name, email, address, password)
+            values
+            ('${this.name}','${this.email}','${this.address}','${this.password}');
+        `);
     }
 }
 

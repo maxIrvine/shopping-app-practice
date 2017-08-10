@@ -5,9 +5,11 @@ const Customer = require('../customer');
 
 describe("Customers", () => {
     it("Should be able to save to the database", (done) => {
-        let myCustomer= new Customer();
+        let myCustomer= new Customer('me', 'me@me.com', '123 me street', 'm3m3m3');
         myCustomer
             .save()
-            .then(done);
+            .then( (result) => {
+                done();
+            });
     });
 });
